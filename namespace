@@ -1,0 +1,45 @@
+<?php
+
+// Namespace untuk produk di toko
+namespace Store;
+
+class Product {
+    private string $name;
+    private float $price;
+
+    public function __construct(string $name, float $price) {
+        $this->name = $name;
+        $this->price = $price;
+    }
+
+    public function getInfo(): string {
+        return "Store Product: {$this->name}, Price: Rp. " . number_format($this->price, 0, ',', '.') . "<br>";
+    }
+}
+
+// Namespace untuk produk di gudang
+namespace Warehouse;
+
+class Product {
+    private string $name;
+    private int $stock;
+
+    public function __construct(string $name, int $stock) {
+        $this->name = $name;
+        $this->stock = $stock;
+    }
+
+    public function getInfo(): string {
+        return "Warehouse Product: {$this->name}, Stock: {$this->stock} units<br>";
+    }
+}
+
+// Penggunaan objek dari kedua namespace
+use Store\Product as StoreProduct;
+use Warehouse\Product as WarehouseProduct;
+
+$storeProduct = new StoreProduct("Laptop", 15000000);
+echo $storeProduct->getInfo(); 
+
+$warehouseProduct = new WarehouseProduct("Laptop", 100);
+echo $warehouseProduct->getInfo();
