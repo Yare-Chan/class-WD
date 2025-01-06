@@ -1,0 +1,64 @@
+<?php
+// Kelas induk Pegawai
+class Pegawai {
+    const NAMA_KLAS = 'Pegawai';
+
+    public string $nama;
+    public int $gajiPokok;
+
+    public function __construct(string $nama, int $gajiPokok) {
+        $this->nama = $nama;
+        $this->gajiPokok = $gajiPokok;
+    }
+
+    public function infoPegawai(): void {
+        echo "Nama: {$this->nama}, Gaji Pokok: {$this->gajiPokok}<br>";
+    }
+}
+
+// Kelas turunan KaryawanTetap
+class KaryawanTetap extends Pegawai {
+    public int $tunjangan;
+
+    public function __construct(string $nama, int $gajiPokok, int $tunjangan) {
+        parent::__construct($nama, $gajiPokok);
+        $this->tunjangan = $tunjangan;
+    }
+
+    public function infoTunjangan(): void {
+        echo "Tunjangan: {$this->tunjangan}<br>";
+    }
+}
+
+// Kelas turunan Freelance
+class Freelance extends Pegawai {
+    public int $jamKerja;
+    public int $upahPerJam;
+
+    public function __construct(string $nama, int $gajiPokok, int $jamKerja, int $upahPerJam) {
+        parent::__construct($nama, $gajiPokok);
+        $this->jamKerja = $jamKerja;
+        $this->upahPerJam = $upahPerJam;
+    }
+
+    public function hitungGaji(): void {
+        $totalGaji = $this->jamKerja * $this->upahPerJam;
+        echo "Jam Kerja: {$this->jamKerja}, Upah per Jam: {$this->upahPerJam}<br>";
+        echo "Total Gaji: {$totalGaji}<br>";
+    }
+}
+
+// Membuat objek KaryawanTetap dan Freelance
+$karyawanTetap = new KaryawanTetap("Ali", 5000000, 1000000);
+$freelance = new Freelance("Budi", 0, 50, 100000);
+
+// Memanggil metode untuk KaryawanTetap
+echo "Informasi Karyawan Tetap:\n";
+$karyawanTetap->infoPegawai();
+$karyawanTetap->infoTunjangan();
+echo "\n";
+
+// Memanggil metode untuk Freelance
+echo "Informasi Freelance:\n";
+$freelance->infoPegawai();
+$freelance->hitungGaji();
